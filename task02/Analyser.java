@@ -65,15 +65,17 @@ public class Analyser {
                         if(firstMap.containsKey(currentWord)){
                             if(!secondMap.containsKey(nextWord)){
                                 secondMap.put(nextWord, 1);
-                                firstMap.replace(currentWord, secondMap);
+                    
                             }
                             else{
                                 int initialCount = secondMap.get(nextWord);
                                 secondMap.replace(nextWord, initialCount+1);
-                                firstMap.replace(currentWord, secondMap);
+                                
                             }
+                            firstMap.replace(currentWord, secondMap);
                         }
                         else{
+                            
                             firstMap.put(currentWord, secondMap);
                         }
                         
@@ -84,7 +86,7 @@ public class Analyser {
 
                 //iterate nested map
                 for(int i = 0; i < firstMap.size(); i++) {
-                    for(int j = 0; j < secondMap.get(i).size(); j++) {
+                    for(int j = 0; j < secondMap.size(); j++) {
                   //probability calculation.......
                     } 
                  }
