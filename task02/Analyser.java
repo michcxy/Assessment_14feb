@@ -54,17 +54,6 @@ public class Analyser {
                 //System.out.println(strippedText);
 
                 String[] textArray = strippedText.split(" ");
-                //System.out.println(Arrays.toString(textArray));
-
-                /*
-                 * - initial: lastWord = ""; currentWord = words[i];
-                - if lastWord is empty then assign lastWord = currentWord and continue to next loop
-                - how to add/update the map: check if lastWord is already in the map.
-                a. if yes, check if currentWord is in the submap
-                - if yes, increment the integer tagged to currentWord using replace. 
-                - if no, put currentWord, 1 into the submap
-                b. if no, put lastWord, (currentWord, 1)) into the map (google nested maps for more details on this)
-                 */
 
                 Map<String, Map<String, Integer>> firstMap = new HashMap<>();
                 Map<String, Integer> secondMap = new HashMap<>();
@@ -76,10 +65,12 @@ public class Analyser {
                         if(firstMap.containsKey(currentWord)){
                             if(!secondMap.containsKey(nextWord)){
                                 secondMap.put(nextWord, 1);
+                                firstMap.replace(currentWord, secondMap);
                             }
                             else{
                                 int initialCount = secondMap.get(nextWord);
                                 secondMap.replace(nextWord, initialCount+1);
+                                firstMap.replace(currentWord, secondMap);
                             }
                         }
                         else{
@@ -88,63 +79,22 @@ public class Analyser {
                         
                     }
         
-                System.out.println(secondMap);
-                //System.out.println(firstMap);
+                //System.out.println(secondMap);
+                System.out.println(firstMap);
 
-
-
-             
-                for(int j = 0; j < firstMap.size(); j++) {
-                    for(int k = 0; j < secondMap.size(); k++) {
-                  //do actions here 
+                //iterate nested map
+                for(int i = 0; i < firstMap.size(); i++) {
+                    for(int j = 0; j < secondMap.get(i).size(); j++) {
+                  //probability calculation.......
                     } 
                  }
                 
-
-                    /*
-                    for(int i = 0; i < firstMap.size(); i++) {
-                        int secondMap = firstMap.get(i);
-                    for(int j = 0; j < secondMap.size(); j++) {
-
-                        String currentWord = textArray[i];
-                        if(prevWord == ""){
-                            prevWord = currentWord;
-                        }
-                        else{
-                            prevWord = textArray[i-1];
-                        }
-                        //check if prevWord is in firstMap
-                        if(firstMap.containsKey(prevWord)){
-                            if(secondMap.containsKey(currentWord)){
-                                int initialCount = firstMap.get(prevWord).get(currentWord);
-                                secondMap.replace(currentWord, initialCount + 1);
-                            }
-                            else{
-                                secondMap.put(currentWord, 1);
-                            }
-                        }
-                        else{
-                            firstMap.put(prevWord, secondMap);
-                        }
-                 } 
-                }
-                
-                }
-                System.out.print(firstMap);
-                 */
-  
-
-                //OriginalFrequency = Outermap.get(word).get(word2)
-
-                //Outermap.get(word).replace(word2, originalFrequency + 1)    
-
             
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-     
+  
     
 }
